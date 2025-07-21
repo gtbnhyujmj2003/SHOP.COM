@@ -1,0 +1,118 @@
+美安（Market America）的 SHOP.COM 模式是一種多層次分銷（MLM）+ 電子商務平台的混合商業模型。若你是開發者，想要用 Flutter 或 React Native 實作類似的 app，可以從以下幾個技術面簡單理解這個模式，並對應基礎語法做簡單說明。
+
+🛒 一、SHOP.COM 模式核心邏輯
+主要分成幾個功能模組：
+
+會員系統（註冊、登入、推薦人制度）
+
+商品商城（瀏覽商品、加入購物車、結帳）
+
+返利系統（購物回饋點數、推薦人分潤）
+
+下線管理（查看下線、收益報表）
+
+通知與推播
+
+🧱 二、Flutter / React Native 對應語法簡介
+1. 使用者登入/註冊畫面
+Flutter
+
+dart
+複製
+編輯
+TextField(
+  controller: _emailController,
+  decoration: InputDecoration(labelText: 'Email'),
+),
+ElevatedButton(
+  onPressed: _login,
+  child: Text('登入'),
+);
+React Native (JSX)
+
+jsx
+複製
+編輯
+<TextInput
+  value={email}
+  onChangeText={setEmail}
+  placeholder="Email"
+/>
+<Button
+  title="登入"
+  onPress={handleLogin}
+/>
+2. 商品列表 (API 資料綁定)
+Flutter
+
+dart
+複製
+編輯
+FutureBuilder(
+  future: fetchProducts(),
+  builder: (context, snapshot) {
+    if (snapshot.hasData) {
+      return ListView.builder(
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, index) {
+          return Text(snapshot.data[index].name);
+        },
+      );
+    }
+    return CircularProgressIndicator();
+  },
+);
+React Native
+
+jsx
+複製
+編輯
+useEffect(() => {
+  fetchProducts().then(setProducts);
+}, []);
+
+return (
+  <FlatList
+    data={products}
+    renderItem={({ item }) => <Text>{item.name}</Text>}
+    keyExtractor={(item) => item.id}
+/>
+);
+3. 加入購物車
+Flutter
+
+dart
+複製
+編輯
+IconButton(
+  icon: Icon(Icons.add_shopping_cart),
+  onPressed: () => cart.add(product),
+);
+React Native
+
+jsx
+複製
+編輯
+<TouchableOpacity onPress={() => addToCart(product)}>
+  <Text>🛒 加入購物車</Text>
+</TouchableOpacity>
+4. 推薦人制度 (註冊綁定推薦碼)
+Flutter
+
+dart
+複製
+編輯
+TextField(
+  controller: _referralController,
+  decoration: InputDecoration(labelText: '推薦人代碼'),
+);
+React Native
+
+jsx
+複製
+編輯
+<TextInput
+  value={referralCode}
+  onChangeText={setReferralCode}
+  placeholder="推薦人代碼"
+/>
