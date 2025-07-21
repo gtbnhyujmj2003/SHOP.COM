@@ -1,0 +1,166 @@
+dart語法介紹一下
+
+
+ChatGPT 說：
+當然可以！Dart 是由 Google 開發的一種 物件導向編程語言，是 Flutter 的主要語言。它語法接近 Java/C#，學習曲線相對平緩，適合前端和全端開發。以下是 Dart 的語法重點介紹（入門到實戰基礎）：
+
+🧱 一、Dart 基礎語法結構
+1. 變數宣告
+dart
+複製
+編輯
+var name = 'Jack';      // 推斷型別
+String name = 'Jack';   // 明確型別
+int age = 30;
+double height = 1.75;
+bool isActive = true;
+2. 常數
+dart
+複製
+編輯
+final city = 'Taipei';   // 執行時才決定，但不可再改
+const pi = 3.14159;      // 編譯期常數
+🔁 二、流程控制
+1. if / else
+dart
+複製
+編輯
+if (age >= 18) {
+  print('Adult');
+} else {
+  print('Child');
+}
+2. switch
+dart
+複製
+編輯
+switch (role) {
+  case 'admin':
+    print('Welcome admin');
+    break;
+  case 'user':
+    print('Welcome user');
+    break;
+  default:
+    print('Unknown role');
+}
+3. for / while / foreach
+dart
+複製
+編輯
+for (int i = 0; i < 5; i++) {
+  print(i);
+}
+
+var items = ['apple', 'banana'];
+for (var item in items) {
+  print(item);
+}
+🧰 三、函數與箭頭語法
+dart
+複製
+編輯
+int add(int a, int b) {
+  return a + b;
+}
+
+int multiply(int a, int b) => a * b;  // 箭頭語法（簡潔）
+可選參數：
+
+dart
+複製
+編輯
+void greet(String name, [String title = 'Mr']) {
+  print('Hello $title $name');
+}
+
+void greet2({required String name, int age = 18}) {
+  print('Name: $name, Age: $age');
+}
+🧱 四、類別與物件導向（OOP）
+dart
+複製
+編輯
+class Person {
+  String name;
+  int age;
+
+  // 建構函數
+  Person(this.name, this.age);
+
+  void sayHello() {
+    print('Hi, I am $name, $age years old');
+  }
+}
+
+// 使用
+var p = Person('Jack', 35);
+p.sayHello();
+繼承：
+
+dart
+複製
+編輯
+class Student extends Person {
+  String school;
+
+  Student(String name, int age, this.school) : super(name, age);
+}
+📦 五、List / Map 基礎
+List（清單）
+dart
+複製
+編輯
+var fruits = ['apple', 'banana'];
+fruits.add('orange');
+print(fruits[1]); // banana
+Map（字典）
+dart
+複製
+編輯
+var user = {
+  'name': 'Tom',
+  'age': 25,
+};
+print(user['name']);
+🕹 六、非同步與 Future / async / await
+dart
+複製
+編輯
+Future<String> fetchData() async {
+  await Future.delayed(Duration(seconds: 2));
+  return 'Data loaded';
+}
+
+void main() async {
+  var result = await fetchData();
+  print(result);
+}
+🖼 七、Flutter UI 常見搭配（範例）
+dart
+複製
+編輯
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Hello Dart')),
+        body: Center(child: Text('你好世界')),
+      ),
+    );
+  }
+}
+📌 八、小結：Dart 語法特點
+特性	說明
+類似 Java	OOP 思維、類別、繼承熟悉
+函數式支援	箭頭函數、第一級函數
+支援 null 安全	String? 表示可為 null
+非同步強大	async/await, Future 支援
+非常適合 UI 開發	配合 Flutter 寫 UI 很順手
+
+如果你有想要用 Dart 寫一個簡單的 app 或功能（例如購物車、會員系統、聊天 app），我可以幫你範例架起來一步步講解。要不要試試？
