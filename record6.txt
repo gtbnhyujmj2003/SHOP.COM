@@ -1,0 +1,112 @@
+你想要寫一個功能叫做 saki，接受一個字串作為輸入。這裡我提供一個基本的 Dart 實作，這個函式可以接受一個字串，並且「做一些處理」（例如輸出、回傳、加工、儲存等）——我們先從最基本的版本開始。
+
+✅ 版本 1：最簡單的函式 saki 接收並印出字串
+dart
+複製
+編輯
+void saki(String input) {
+  print("Saki 收到字串: $input");
+}
+
+void main() {
+  saki("你好 Saki！");
+}
+🔹 輸出：
+
+nginx
+複製
+編輯
+Saki 收到字串: 你好 Saki！
+✅ 版本 2：函式 saki 做字串處理（例如倒轉、轉大寫）
+dart
+複製
+編輯
+String saki(String input) {
+  // 將字串轉大寫再倒轉
+  return input.toUpperCase().split('').reversed.join();
+}
+
+void main() {
+  var result = saki("hello saki");
+  print("處理後: $result");
+}
+🔹 輸出：
+
+makefile
+複製
+編輯
+處理後: IKAS OLLEH
+✅ 版本 3：Flutter TextField 中使用 saki 函式
+如果你想要把 saki() 用在 Flutter UI 裡，比如用戶輸入文字，按下按鈕後由 saki() 處理，這是範例：
+
+dart
+複製
+編輯
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: SakiPage(),
+    );
+  }
+}
+
+class SakiPage extends StatefulWidget {
+  @override
+  _SakiPageState createState() => _SakiPageState();
+}
+
+class _SakiPageState extends State<SakiPage> {
+  final TextEditingController _controller = TextEditingController();
+  String output = '';
+
+  String saki(String input) {
+    return input.toUpperCase();
+  }
+
+  void _processInput() {
+    setState(() {
+      output = saki(_controller.text);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Saki 接收字串')),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(labelText: '輸入字串給 Saki'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _processInput,
+              child: Text('送出給 Saki'),
+            ),
+            SizedBox(height: 20),
+            Text('Saki 的回覆: $output'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+🧠 延伸應用想法
+你可以把 saki() 定義成：
+
+回傳處理過的文字（如翻譯、加密）
+
+呼叫 API 分析字串（像 GPT、翻譯、分類等）
+
+存入資料庫作紀錄
+
+做推薦或判斷（如「這句話是感謝、是抱怨、還是中性？」）
+
