@@ -1,0 +1,82 @@
+我先以「輸入一個數字 m，除以 4 回傳結果」這個最直接的解釋，來實作 Flutter/Dart 函式。
+
+✅ Dart 實作：m / 4 簡單功能
+dart
+複製
+編輯
+double divideByFour(num m) {
+  return m / 4;
+}
+
+void main() {
+  print(divideByFour(20));  // 輸出: 5.0
+  print(divideByFour(7));   // 輸出: 1.75
+}
+📱 Flutter UI 示範：輸入數字 m，自動除以 4 並顯示
+dart
+複製
+編輯
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DivideByFourPage(),
+    );
+  }
+}
+
+class DivideByFourPage extends StatefulWidget {
+  @override
+  _DivideByFourPageState createState() => _DivideByFourPageState();
+}
+
+class _DivideByFourPageState extends State<DivideByFourPage> {
+  final TextEditingController _controller = TextEditingController();
+  String result = '';
+
+  void _calculate() {
+    final input = double.tryParse(_controller.text);
+    if (input != null) {
+      final output = input / 4;
+      setState(() {
+        result = '結果是：$output';
+      });
+    } else {
+      setState(() {
+        result = '請輸入正確的數字';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('m / 4 計算器')),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: '請輸入 m'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _calculate,
+              child: Text('計算 m ÷ 4'),
+            ),
+            SizedBox(height: 20),
+            Text(result, style: TextStyle(fontSize: 24)),
+          ],
+        ),
+      ),
+    );
+  }
+}
